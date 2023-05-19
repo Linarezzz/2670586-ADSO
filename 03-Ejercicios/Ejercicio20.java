@@ -5,22 +5,27 @@ public class Ejercicio20{
 
         Scanner teclado = new Scanner(System.in);
 
-        int numero, sumDig=0;
-
-
-
-        System.out.println("Solicita al usuario un número entero de 5 dígitos como maximo, la aplicación debe sumar todos los dígitos. Por ejemplo, si el número es 12345, la suma sería 1 + 2 + 3 + 4 + 5 = 15. Muestra el resultado por pantalla.");
+        
+        System.out.println("Solicita al usuario un número entero de 5 dígitos como maximo, la aplicación debe sumar todos los dígitos.");
 
         System.out.println("Escribe el numero entero de 5 digitos");
-        numero = teclado.nextInt();
+        int numero = teclado.nextInt();  // Se puede inicializar 
+
+        int digito_1 = numero%10;
+        int digito_2 = (numero%100)/10;
+        int digito_3 = (numero%1000)/100;
+        int digito_4 = (numero%10000)/1000;
+        int digito_5 = numero/10000;
+
+        System.out.println(" Digito 1 es: "+digito_1);
+        System.out.println(" Digito 2 es: "+digito_2);
+        System.out.println(" Digito 3 es: "+digito_3);
+        System.out.println(" Digito 4 es: "+digito_4);
+        System.out.println(" Digito 5 es: "+digito_5);
 
         
 
-        while (numero != 0) {
-        sumDig = sumDig + (numero % 10);
-        numero = numero / 10;
-     } 
-     
-        System.out.println("La suma de los dígitos es " + sumDig) ;
+        int resultado = digito_1 + digito_2 + digito_3 + digito_4 + digito_5;
+        System.out.println("La suma de los dígitos es " + resultado);
     }
 }

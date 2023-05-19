@@ -1,7 +1,7 @@
 public class Principal{    // Todos los archivos java deben empezar con esta estructura, principal es por que el nombre del archivo es ese, sino cambia
     public static void main(String [] args){
 
-        System.out.println( "++-------------------------------++" );   //System.out.println es para escribir algún texto //
+        System.out.println( "++-------------------------------++" );   //System.out.println es para escribir algún texto//
         System.out.println( "++---  SISTEMA DE FACURACION  ---++" );
         System.out.println( "++-------------------------------++" );
         System.out.println( "||                               ||" );
