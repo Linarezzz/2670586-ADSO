@@ -16,12 +16,10 @@ public class Ejercicio02{
         if(numero<100 || numero>999){  // || es para decir O //
             System.out.println("El numero no es valido");
 
-        }if else(numero % 2 == 0){
-            System.out.println("El numero es par");
-
+        }else if(numero % 2 ==0){   // Else if se usa para una condicion dentro de una condicion // 
+            System.out.println(numero + " es un numero par");
         }else{
-            System.out.println("El numero es impar");
-        }         
-
+            System.out.println(numero + " es un numero impar");
+        }
     }
 }
