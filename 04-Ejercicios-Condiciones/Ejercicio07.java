@@ -47,7 +47,7 @@ public class Ejercicio07{
             ultimoDigito1000000 = numero % 10;
             digitosIntermedios1000000 = (numero / 10) % 100_000;
             System.out.println("// ---------- FORMATO DE MONEDA ----------- //");
-            System.out.println("Moneda: $ " + primerosDigitos1000000 + "." + String.format("%05d", digitosIntermedios1000000) + ultimoDigito1000000);
+            System.out.println("Moneda: $ " + primerosDigitos1000000 + "." + String.format("%,07d", digitosIntermedios1000000) + ultimoDigito1000000);
         }
 
         // PENDIENTE POR TERMINAR // 
