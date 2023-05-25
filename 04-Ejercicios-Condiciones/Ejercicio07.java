@@ -5,14 +5,14 @@ public class Ejercicio07{
 
         Scanner teclado = new Scanner(System.in);
 
-        Long numero, primerosDigitos1000, ultimoDigito1000, digitosIntermedios1000, primerosDigitos10000, ultimoDigito10000, digitosIntermedios10000, primerosDigitos100000, ultimoDigito100000, digitosIntermedios100000, primerosDigitos1000000, digitosIntermedios1000000, ultimoDigito1000000 ;
+        Long numero, primerosDigitos1000, ultimoDigito1000, digitosIntermedios1000, primerosDigitos10000, ultimoDigito10000, digitosIntermedios10000, primerosDigitos100000, ultimoDigito100000, digitosIntermedios100000, primerosDigitos1000000, digitosIntermedios1000000, ultimoDigito1000000, digitosIntermedios2_1000000 ;
 
         System.out.println("pida al usuario ingresar un número (Máximo 10 dígitos e inferior a los dos mil millones); Después se debe mostrar en pantalla el numero con formato de moneda.");
 
         System.out.print("Ingresa un numero: ");
         numero = teclado.nextLong();
 
-        if(numero < 0 || numero <= 999 || numero >= 2_000_000_000){   // Se usan _ para no cambiar el valor del numero que se quiere usar //
+        if(numero < 0 || numero <= 999 || numero > 2_000_000_000){   // Se usan _ para no cambiar el valor del numero que se quiere usar //
             System.out.println("El numero no es valido");
         }
 
@@ -43,14 +43,15 @@ public class Ejercicio07{
         }
 
         if(numero >= 1_000_000_000L && numero < 2_000_000_000L){
-            primerosDigitos1000000 = numero / 1_000_000;
-            ultimoDigito1000000 = numero % 10;
-            digitosIntermedios1000000 = (numero / 10) % 100_000;
+            primerosDigitos1000000 = numero / 1_000_000_000L;
+            digitosIntermedios1000000 = (numero % 1_000_000_000L) / 1_000_000L;
+            digitosIntermedios2_1000000 = (numero % 1_000_000L) / 1_000L;
+            ultimoDigito1000000 = numero % 1_000L;
             System.out.println("// ---------- FORMATO DE MONEDA ----------- //");
-            System.out.println("Moneda: $ " + primerosDigitos1000000 + "." + String.format("%,07d", digitosIntermedios1000000) + ultimoDigito1000000);
+            System.out.println("Moneda: $" + primerosDigitos1000000 + "." + String.format("%03d", digitosIntermedios1000000) + "." + String.format("%03d", digitosIntermedios2_1000000) + "." + String.format("%03d", ultimoDigito1000000));
         }
-
-        // PENDIENTE POR TERMINAR // 
+        
+        
 
            
     }
