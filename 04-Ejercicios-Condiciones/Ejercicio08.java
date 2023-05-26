@@ -1,223 +1,254 @@
 import java.util.Scanner;
 
 public class Ejercicio08{
-    public static void main(String[]args){
-        Scanner entrada = new Scanner(System.in);
+	public static void main(String[] args) {
+		
+		// Variable de entrada
+		Scanner entrada = new Scanner(System.in);
 
-        System.out.println("no poner ningun tipo de signo en medio de la fecha, simplemente coloque numeros");
-        System.out.println("Profavor ingrese un afecha mayor a 1700 y menor a 2100");
+		System.out.print(" => Ingrese un numero (maximo 5 digitos): ");
+		int numero = entrada.nextInt();
 
+		if(numero>=0 && numero<=99999){
 
-        int fecha=entrada.nextInt();
+			int d1 = (numero/10000)%10;
+			int d2 = (numero/1000)%10;
+			int d3 = (numero/100)%10;
+			int d4 = (numero/10)%10;
+			int d5 = numero%10;
 
-        int numero1= fecha%10;
-        int numero2=(fecha/10)%10;
-        int numero3=(fecha/100)%10;
-        int numero4=(fecha/1000)%10;
-        int numero5=(fecha/10000)%10;
-        int numero6=(fecha/100000)%10;
-        int numero7=(fecha/1000000)%10;
-        int numero8=(fecha/10000000)%10;
+			// Algoritmo para validar Digito 1
+			if (d1==0) {
+				System.out.print("");
+			}else if(d1==1){
+				if (d2==0) {
+					System.out.print("DIEZ MIL ");
+				}else if(d2==1){
+					System.out.print("ONCE MIL ");
+				}else if(d2==2){
+					System.out.print("DOCE MIL ");
+				}else if(d2==3){
+					System.out.print("TRECE MIL ");
+				}else if(d2==4){
+					System.out.print("CATORCE MIL ");
+				}else if(d2==5){
+					System.out.print("QUINCE MIL ");
+				}else if(d2==6){
+					System.out.print("DIECISEIS MIL ");
+				}else if(d2==7){
+					System.out.print("DIECISIETE MIL ");
+				}else if(d2==8){
+					System.out.print("DIECIOCHO MIL ");
+				}else if(d2==9){
+					System.out.print("DIECINUEVE MIL ");
+				}
+			}else if(d1==2){
+				if (d2==0) {
+					System.out.print("VEINTE MIL ");
+				}else{
+					System.out.print("VEINTI");
+				}
+			}else if(d1==3){
+				if (d2==0) {
+					System.out.print("TREINTA MIL ");
+				}else{
+					System.out.print("TREINTA Y ");
+				}
+			}else if(d1==4){
+				if (d2==0) {
+					System.out.print("CUARENTA MIL ");
+				}else{
+					System.out.print("CUARENTA Y ");
+				}
+			}else if(d1==5){
+				if (d2==0) {
+					System.out.print("CINCUENTA MIL ");
+				}else{
+					System.out.print("CINCUENTA Y ");
+				}
+			}else if(d1==6){
+				if (d2==0) {
+					System.out.print("SESENTA MIL ");
+				}else{
+					System.out.print("SESENTA Y ");
+				}
+			}else if(d1==7){
+				if (d2==0) {
+					System.out.print("SETENTA MIL ");
+				}else{
+					System.out.print("SETENTA Y ");
+				}
+			}else if(d1==8){
+				if (d2==0) {
+					System.out.print("OCHENTA MIL ");
+				}else{
+					System.out.print("OCHENTA Y ");
+				}
+			}else if(d1==9){
+				if (d2==0) {
+					System.out.print("NOVENTA MIL ");
+				}else{
+					System.out.print("NOVENTA Y ");
+				}
+			}
 
-        if(numero8 ==0 && numero7 ==1){
-            System.out.print("primero de ");
-        }else if(numero8 ==0 && numero7 ==2){
-            System.out.print("dos de ");
-        }else if(numero8 ==0 && numero7 ==3){
-            System.out.print("tres de ");
-        }else if(numero8 ==0 && numero7 ==4){
-            System.out.print("cuatro de ");
-        }else if(numero8 ==0 && numero7 ==5){
-            System.out.print("cinco de ");
-        }else if(numero8 ==0 && numero7 ==6){
-            System.out.print("seis de ");
-        }else if(numero8 ==0 && numero7 ==7){
-            System.out.print("siete de ");
-        }else if(numero8 ==0 && numero7 ==8){
-            System.out.print("ocho de ");
-        }else if(numero8 ==0 && numero7 ==9){
-            System.out.print("nueve de ");
-        }else if(numero8 ==1 && numero7 ==0){
-            System.out.print("diez de ");
-        }else if(numero8 ==1 && numero7 ==1){
-            System.out.print("once de ");
-        }else if(numero8 ==1 && numero7 ==2){
-            System.out.print("doce de ");
-        }else if(numero8 ==1 && numero7 ==3){
-            System.out.print("trese de ");
-        }else if(numero8 ==1 && numero7 ==4){
-            System.out.print("catorse de ");
-        }else if(numero8 ==1 && numero7 ==5){
-            System.out.print("quince de ");
-        }else if(numero8 ==1 && numero7 ==6){
-            System.out.print("dieciceis de ");
-        }else if(numero8 ==1 && numero7 ==7){
-            System.out.print("dieciete de ");
-        }else if(numero8 ==1 && numero7 ==8){
-            System.out.print("dieciocho de ");
-        }else if(numero8 ==1 && numero7 ==9){
-            System.out.print("diecinueve de ");
-        }else if(numero8 ==2 && numero7 ==0){
-            System.out.print("veinte de ");
-        }else if(numero8 ==2 && numero7 ==1){
-            System.out.print("ventiuno de ");
-        }else if(numero8 ==2 && numero7 ==2){
-            System.out.print("veintidos de ");
-        }else if(numero8 ==2 && numero7 ==3){
-            System.out.print("veintitres de ");
-        }else if(numero8 ==2 && numero7 ==4){
-            System.out.print("veinticuatro de ");
-        }else if(numero8 ==2 && numero7 ==5){
-            System.out.print("veinticinco de ");
-        }else if(numero8 ==2 && numero7 ==6){
-            System.out.print("vientiseis de ");
-        }else if(numero8 ==2 && numero7 ==7){
-            System.out.print("veintisiete de ");
-        }else if(numero8 ==2 && numero7 ==8){
-            System.out.print("veintiocho de ");
-        }else if(numero8 ==2 && numero7 ==9){
-            System.out.print("veintinueve de ");
-        }else if(numero8 ==3 && numero7 ==0){
-            System.out.print("treinta de ");
-        }else if(numero8 ==3 && numero7 ==1){
-            System.out.print("treinta y uno de ");
-        }else{
-            System.out.print("");
-        }
+			// Algoritmo para validar Digito 2
+			if (d2==0) {
+				System.out.print("");
+			}else if(d2==1){
+				if (d1==0) {
+					System.out.print("MIL ");
+				}
+				if (d1>=2 && d1<=9) {
+					System.out.print("UN MIL ");
+				}
+			}else if(d2==2){
+				if (d1!=1) {
+					System.out.print("DOS MIL ");
+				}
+			}else if(d2==3){
+				if (d1!=1) {
+					System.out.print("TRES MIL ");
+				}
+			}else if(d2==4){
+				if (d1!=1) {
+					System.out.print("CUATRO MIL ");
+				}
+			}else if(d2==5){
+				if (d1!=1) {
+					System.out.print("CINCO MIL ");
+				}
+			}else if(d2==6){
+				if (d1!=1) {
+					System.out.print("SEIS MIL ");
+				}
+			}else if(d2==7){
+				if (d1!=1) {
+					System.out.print("SIETE MIL ");
+				}
+			}else if(d2==8){
+				if (d1!=1) {
+					System.out.print("OCHO MIL ");
+				}
+			}else if(d2==9){
+				if (d1!=1) {
+					System.out.print("NUEVE MIL ");
+				}
+			}
 
+			// Algoritmo para validar Digito 3
+			if (d3==0) {
+				System.out.print("");
+			}else if(d3==1){
+				if(d4==0 && d5==0){
+					System.out.print("CIEN");
+				}else{
+					System.out.print("CIENTO ");
+				}
+			}else if(d3==2){
+				System.out.print("DOSCIENTOS ");
+			}else if(d3==3){
+				System.out.print("TRESCIENTOS ");
+			}else if(d3==4){
+				System.out.print("CUATROCIENTOS ");
+			}else if(d3==5){
+				System.out.print("QUINIENTOS ");
+			}else if(d3==6){
+				System.out.print("SEISCIENTOS ");
+			}else if(d3==7){
+				System.out.print("SETECIENTOS ");
+			}else if(d3==8){
+				System.out.print("OCHOCIENTOS ");
+			}else if(d3==9){
+				System.out.print("NOVECIENTOS ");
+			}
 
-        if (numero6 == 0 && numero5 == 1){
-            System.out.print("enero del ");
-        }else if (numero6 == 0 && numero5 == 2){
-            System.out.print("febrero del ");
-        }else if (numero6 == 0 && numero5 == 3){
-            System.out.print("marzo del ");
-        }else if (numero6 == 0 && numero5 == 4){
-            System.out.print("abril del ");
-        }else if (numero6 == 0 && numero5 == 5){
-            System.out.print("mayo del ");
-        }else if (numero6 == 0 && numero5 == 6){
-            System.out.print("junio del ");
-        }else if (numero6 == 0 && numero5 == 7){
-            System.out.print("julio del ");
-        }else if (numero6 == 0 && numero5 == 8){
-            System.out.print("agosto del ");
-        }else if (numero6 == 0 && numero5 == 9){
-            System.out.print("septiempre del ");
-        }else if (numero6 == 1 && numero5 == 0){
-            System.out.print("octubre del ");
-        }else if (numero6 == 1 && numero5 == 1){
-            System.out.print("noviembre del ");
-        }else if (numero6 == 1 && numero5 == 2){
-            System.out.print("diciembre del ");
-        }else{
-            System.out.print("");
-        }
+			// Algoritmo para validar Digito 4
+            if (d4==0){
+                System.out.print("");
+            }else if(d4==1){
+                if(d5==0){
+                    System.out.print("DIEZ");
+                }else{
+                    System.out.print("DIECI ");
+                }
+                
+            }else if(d4==2){
+                if(d5==0){
+                    System.out.print("VEINTE ");
+                }else{
+                    System.out.print("VEINTI ");
+                }
+            }else if(d4==3){
+                if(d5==0){
+                    System.out.print("TREINTA ");
+                }else{
+                    System.out.print("TREINTA Y ");
+                }
+            }else if(d4==4){
+                if(d5==0){
+                    System.out.print("CUARENTA ");
+                }else{
+                    System.out.print("CUARENTA Y ");
+                }
+            }else if(d4==5){
+                if(d5==0){
+                    System.out.print("CINCUENTA ");
+                }else{
+                    System.out.print("CINCUENTA Y ");
+                }
+            }else if(d4==6){
+                if(d5==0){
+                    System.out.print("SESENTA ");
+                }else{
+                    System.out.print("SESENTA Y ");
+                }
+            }else if(d4==7){
+                if(d5==0){
+                    System.out.print("SETENTA ");
+                }else{
+                    System.out.print("SETENTA Y ");
+                } 
+            }else if(d4==8){
+                if(d5==0){
+                    System.out.print("OCHENTA ");
+                }else{
+                    System.out.print("OCHENTA Y ");
+                }
+            }else if(d4==9){
+                if(d5==0){
+                    System.out.print("NOVENTA ");
+                }else{
+                    System.out.print("NOVENTA Y ");
+                }   
+            }
 
+            // Algoritmo para validar Digito 5
+            if (d5==0){
+                System.out.print("CERO");
+            }else if(d5==1){
+                System.out.print("UNO");
+            }else if(d5==2){
+                System.out.print("DOS");
+            }else if(d5==3){
+                System.out.print("TRES");
+            }else if(d5==4){
+                System.out.print("CUATRO");
+            }else if(d5==5){
+                System.out.print("CINCO");
+            }else if(d5==6){
+                System.out.print("SEIS");
+            }else if(d5==7){
+                System.out.print("SIETE");
+            }else if(d5==8){
+                System.out.print("OCHO");
+            }else if(d5==9){
+                System.out.print("NUEVE");
+            }
+			
+		}else{
+			System.out.println(" => Numero invalido. ");
+		}
 
-        if(numero4 ==1){
-            System.out.print("mil ");
-        }else if(numero4 ==2){
-            System.out.print("dos mil ");
-        }else{
-            System.out.print("");
-        }
-
-        if( numero4 ==1 && numero3 ==7){
-            System.out.print("setecientos ");
-        }else if( numero4 ==1 && numero3 ==8){
-            System.out.print("ochocientos ");
-        }else if( numero4 ==1 && numero3 ==9){
-            System.out.print("novecientos ");
-        }else if( numero4 ==2 && numero3 ==1){
-            System.out.print("cien ");
-        }else{
-            System.out.print("");
-        }
-
-        
-
-        if(numero2 ==9 ){
-            System.out.print("noventa y ");
-        }else if(numero2 ==8 ){
-            System.out.print("ochenta y ");
-        }else if(numero2 ==7 ){
-            System.out.print("setenta y ");
-        }else if(numero2 ==6 ){
-            System.out.print("secenta y ");
-        }else if(numero2 ==5 ){
-            System.out.print("cincuenta y ");
-        }else if(numero2 ==4 ){
-            System.out.print("cuarenta y ");
-        }else if(numero2 ==3 ){
-            System.out.print("treinta y ");
-        }else if(numero2 ==2 ){
-            System.out.print("veinti y ");
-        }else if(numero2 ==1 ){
-            System.out.print("diez");
-        }else if(numero2 ==1 && numero1 ==1){
-            System.out.print("once ");
-        }else if(numero2 ==1 && numero1 ==2){
-            System.out.print("doce ");
-        }else if(numero2 ==1 && numero1 ==3){
-            System.out.print("trese ");
-        }else if(numero2 ==1 && numero1 ==4){
-            System.out.print("catorse ");
-        }else if(numero2 ==1 && numero1 ==5){
-            System.out.print("quince ");
-        }else if(numero2 ==1 && numero1 ==6){
-            System.out.print("dieciceis ");
-        }else if(numero2 ==1 && numero1 ==7){
-            System.out.print("diecisiete y ");
-        }else if(numero2 ==1 && numero1 ==8){
-            System.out.print("dieciocho y ");
-        }else if(numero2 ==1 && numero1 ==9){
-            System.out.print("diecinueve y ");
-        }else{
-            System.out.print("");
-        }
-
-
-        if(numero2 ==9 && numero1==0){
-            System.out.print("noventa ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("ochenta ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("setenta ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("secenta ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("cincuenta ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("cuarenta ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("treinta ");
-        }else if(numero2 ==9 && numero1==0){
-            System.out.print("veinte ");
-        }else{
-            System.out.print("");
-        }
-
-        if(numero1 ==1){
-            System.out.print("uno ");
-        }else if(numero1 ==2){
-            System.out.print("dos ");
-        }else if(numero1 ==3){
-            System.out.print("tres ");
-        }else if(numero1 ==4){
-            System.out.print("cuatro ");
-        }else if(numero1 ==5){
-            System.out.print("cinco ");
-        }else if(numero1 ==6){
-            System.out.print("seis ");
-        }else if(numero1 ==7){
-            System.out.print("siete ");
-        }else if(numero1 ==8){
-            System.out.print("ocho ");
-        }else if(numero1 ==9){
-            System.out.print("nueve ");
-        }else{
-            System.out.print("");
-        }
-    }
+	}
 }

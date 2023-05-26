@@ -1,58 +1,113 @@
 import java.util.Scanner;
 
 public class Ejercicio07{
-    public static void main (String[] args){
+	public static void main(String[] args) {
+		
+		// Variable para lectura por teclado
+		Scanner entrada = new Scanner(System.in);
 
-        Scanner teclado = new Scanner(System.in);
+		System.out.print(" => Ingrese un numero (maximo 10 digitos): ");
+		int numero = entrada.nextInt();
 
-        Long numero, primerosDigitos1000, ultimoDigito1000, digitosIntermedios1000, primerosDigitos10000, ultimoDigito10000, digitosIntermedios10000, primerosDigitos100000, ultimoDigito100000, digitosIntermedios100000, primerosDigitos1000000, digitosIntermedios1000000, ultimoDigito1000000, digitosIntermedios2_1000000 ;
+		if(numero>=0 && numero<=2000000000){
 
-        System.out.println("pida al usuario ingresar un número (Máximo 10 dígitos e inferior a los dos mil millones); Después se debe mostrar en pantalla el numero con formato de moneda.");
+			int cientos = numero%1000;
+			int miles = (numero/1000)%1000;
+			int millones = (numero/1000000)%1000;
+			int miles_millones = numero/1000000000; 
 
-        System.out.print("Ingresa un numero: ");
-        numero = teclado.nextLong();
+			System.out.print(" $ ");
 
-        if(numero < 0 || numero <= 999 || numero > 2_000_000_000){   // Se usan _ para no cambiar el valor del numero que se quiere usar //
-            System.out.println("El numero no es valido");
-        }
+			// Algoritmo para imprimir los miles_millones
+			if(miles_millones!=0){
+				System.out.print( miles_millones+"." );
+			}else{
+				System.out.print("");
+			}
 
-        if(numero >= 1000 && numero <= 9999){
-            
-            primerosDigitos1000 = numero / 1000; // Obtener los primeros dígitos // 
-            ultimoDigito1000 = numero % 10; // Obtener el último dígito //
-            digitosIntermedios1000 = (numero % 1000) / 10; // Obtener los dígitos intermedios //
-            System.out.println("// ---------- FORMATO DE MONEDA ----------- //");
-            System.out.println("Moneda: $ " + primerosDigitos1000 + "." + String.format("%02d", digitosIntermedios1000) + ultimoDigito1000);
-        }
+			// Algoritmo para imprimir los millones
+			if(millones==0){
+				if (miles_millones!=0) {
+					System.out.print("000.");
+				}else{
+					System.out.print("");
+				}
+			}else{
+				if (millones>=1 && millones<=9) {
+					if(miles_millones!=0){
+						System.out.print("00"+millones+".");
+					}else{
+						System.out.print(millones+".");
+					}
+				}
+				if (millones>=10 && millones<=99){
+					if (miles_millones!=0) {
+						System.out.print("0"+millones+".");
+					}else{
+						System.out.print(millones+".");
+					}
+				}
+				if (millones>=100 && millones<=999) {
+					System.out.print(millones+".");
+				}
+			}
 
-        if(numero >=10000 && numero <= 99999){
-            primerosDigitos10000 = numero / 1000;
-            ultimoDigito10000 = numero % 10;
-            digitosIntermedios10000 = (numero % 1000) / 10;
-            System.out.println("// ---------- FORMATO DE MONEDA ----------- //");
-            System.out.println("Moneda: $ " + primerosDigitos10000 + "." + String.format("%02d", digitosIntermedios10000) + ultimoDigito10000);
+			// Algoritmo para imprimir los miles
+			if (miles==0) {
+				if( miles_millones!=0 || millones!=0 ){
+					System.out.print("000.");
+				}else{
+					System.out.print("");
+				}
+			}else{
+				if( miles>=1 && miles<=9 ){
+					if( miles_millones!=0 || millones!=0 ){
+						System.out.print("00"+miles+".");
+					}else{
+						System.out.print(miles+".");
+					}
+				}
+				if( miles>=10 && miles<=99) {
+					if( miles_millones!=0 || millones!=0 ){
+						System.out.print("0"+miles+".");
+					}else{
+						System.out.print(miles+".");
+					}
+				}
+				if( miles>=100 && miles<=999) {
+					System.out.print(miles+".");
+				}
+			}
 
-        }
+			// Algoritmo para imprimir los cientos
+			if( cientos==0 ) {
+				if(miles_millones!=0 || millones!=0 || miles!=0 ){
+					System.out.println("000");
+				}else{
+					System.out.println("0");
+				}
+			}else{
+				if( cientos>=1 && cientos<=9 ){
+					if( miles_millones!=0 || millones!=0 || miles!=0 ){
+						System.out.print("00"+cientos);
+					}else{
+						System.out.print(cientos);
+					}
+				}
+				if( cientos>=10 && cientos<=99) {
+					if( miles_millones!=0 || millones!=0 || miles!=0 ){
+						System.out.print("0"+cientos);
+					}else{
+						System.out.print(cientos);
+					}
+				}
+				if( cientos>=100 && cientos<=999) {
+					System.out.print(cientos);
+				}
+			}
+		}else{
+			System.out.println("Numero Invalido.");
+		}
 
-        if(numero >=100000 && numero <=999999){
-            primerosDigitos100000 = numero / 1000;
-            ultimoDigito100000 = numero % 10;
-            digitosIntermedios100000 = (numero % 1000) / 10;
-            System.out.println("// ---------- FORMATO DE MONEDA ----------- //");
-            System.out.println("Moneda: $ " + primerosDigitos100000 + "." + String.format("%02d", digitosIntermedios100000) + ultimoDigito100000);
-        }
-
-        if(numero >= 1_000_000_000L && numero < 2_000_000_000L){
-            primerosDigitos1000000 = numero / 1_000_000_000L;
-            digitosIntermedios1000000 = (numero % 1_000_000_000L) / 1_000_000L;
-            digitosIntermedios2_1000000 = (numero % 1_000_000L) / 1_000L;
-            ultimoDigito1000000 = numero % 1_000L;
-            System.out.println("// ---------- FORMATO DE MONEDA ----------- //");
-            System.out.println("Moneda: $" + primerosDigitos1000000 + "." + String.format("%03d", digitosIntermedios1000000) + "." + String.format("%03d", digitosIntermedios2_1000000) + "." + String.format("%03d", ultimoDigito1000000));
-        }
-        
-        
-
-           
-    }
+	}
 }
