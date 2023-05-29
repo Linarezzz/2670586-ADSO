@@ -169,10 +169,19 @@ public class Ejercicio08{
             }else if(d4==1){
                 if(d5==0){
                     System.out.print("DIEZ");
-                }else{
-                    System.out.print("DIECI ");
-                }
-                
+				}else if (d5==1){
+					System.out.print("ONCE ");
+				}else if (d5==2){
+					System.out.print("DOCE ");
+				}else if (d5==3){
+					System.out.print("TRECE ");
+				}else if (d5==4){
+					System.out.print("CATORCE ");
+				}else if (d5==5){
+					System.out.print("QUINCE ");
+				}else{
+					System.out.print("DIECI ");
+				}	
             }else if(d4==2){
                 if(d5==0){
                     System.out.print("VEINTE ");
@@ -224,10 +233,16 @@ public class Ejercicio08{
             }
 
             // Algoritmo para validar Digito 5
-            if (d5==0){
-                System.out.print("CERO");
+			if (d5==0 && d4==0 && d3==0 && d2==0 && d1==0){
+				if(d4!=1)
+				System.out.print("CERO");
+			    					 
             }else if(d5==1){
+				if(d4==1){
+					System.out.print("");
+				}else{
                 System.out.print("UNO");
+				}
             }else if(d5==2){
                 System.out.print("DOS");
             }else if(d5==3){
@@ -245,6 +260,9 @@ public class Ejercicio08{
             }else if(d5==9){
                 System.out.print("NUEVE");
             }
+            
+
+			
 			
 		}else{
 			System.out.println(" => Numero invalido. ");
