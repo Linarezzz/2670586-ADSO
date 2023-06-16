@@ -20,15 +20,15 @@ public class Ejercicio07{
         while (numero_1 > 1 || numero_2 > 1 || numero_3 > 1) {
             if (numero_1 % divisor == 0 || numero_2 % divisor == 0 || numero_3 % divisor == 0) {
                 if (numero_1 % divisor == 0) {
-                    numero_1 /= divisor;
+                    numero_1 = numero_1 / divisor;
                 }
                 if (numero_2 % divisor == 0) {
-                    numero_2 /= divisor;
+                    numero_2 = numero_2 / divisor;
                 }
                 if (numero_3 % divisor == 0) {
-                    numero_3 /= divisor;
+                    numero_3 = numero_3 / divisor;
                 }
-                mcm *= divisor;
+                mcm = mcm * divisor;
             } else {
                 divisor++;
             }
