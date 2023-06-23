@@ -5,9 +5,24 @@ public class Ejercicio10{
 
         Scanner teclado = new Scanner(System.in);
 
-        System.out.print("--> Ingresar numero: ")
+        System.out.print("--> Ingresar numero: ");
         int numero = teclado.nextInt();
 
-        //PENDIENTE POR TERMINAR
+        if(numero < 1 || numero > 11){
+            System.out.println("El numero no se encuentra en el rango permitido");
+        }else{
+            System.out.println("--> Los numeros primos encontrados son:");
+
+            int primo = 2;
+            int contador = 0;
+
+            while(contador < (numero*numero)){
+                if(numero / primo == 2){
+                    
+
+                }
+            }
+            
+        }            
     }
 }    
