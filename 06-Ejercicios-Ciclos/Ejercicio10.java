@@ -26,11 +26,11 @@ public class Ejercicio10{
                 }
                 if(divisores == 2){
                     System.out.print(" "+"["+primo+"]");
-                    if(contador / primo == 0){
-                        System.out.println("");
-                    }
                     primo++;
                     contador++;
+                    if(contador % numero == 0){
+                        System.out.println("");
+                    }
                 }else{
                     primo++; 
                 }
