@@ -19,10 +19,10 @@ public class Ejercicio10{
             while(contador < (numero*numero)){
                 if(numero % primo == 0){
                     System.out.println("["+numero+"]");
-                    primo = primo + 1;
-                    contador = contador + 1;
+                    primo++;
+                    contador++;
                 }else{
-                    primo = primo + 1;
+                    primo++;
                 }
             }
         }            
