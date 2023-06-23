@@ -16,14 +16,25 @@ public class Ejercicio10{
             int primo = 2;
             int contador = 0;
 
+
             while(contador < (numero*numero)){
-                if(numero % primo == 0){
-                    System.out.println("["+numero+"]");
+                int divisores = 0;
+                for(int i = 1; i<=primo ; i++){
+                    if(primo % i == 0){
+                        divisores = divisores + 1;
+                    }
+                }
+                if(divisores == 2){
+                    System.out.print(" "+"["+primo+"]");
+                    if(contador / primo == 0){
+                        System.out.println("");
+                    }
                     primo++;
                     contador++;
                 }else{
-                    primo++;
+                    primo++; 
                 }
+
             }
         }            
     }
