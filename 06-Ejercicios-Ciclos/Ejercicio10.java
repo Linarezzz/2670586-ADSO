@@ -17,12 +17,14 @@ public class Ejercicio10{
             int contador = 0;
 
             while(contador < (numero*numero)){
-                if(numero / primo == 2){
-                    
-
+                if(numero % primo == 0){
+                    System.out.println("["+numero+"]");
+                    primo = primo + 1;
+                    contador = contador + 1;
+                }else{
+                    primo = primo + 1;
                 }
             }
-            
         }            
     }
 }    
