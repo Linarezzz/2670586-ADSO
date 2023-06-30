@@ -14,13 +14,15 @@ public class Ejercicio10 {
         for (int fila = 0; fila < numero; fila++) {
             for (int columna = 0; columna < numero; columna++) {
                 System.out.print(contador + " ");
-                contador++;
-                if (contador > numero) {
-                    contador = 1;
+                if(columna < numero-1){
+                    contador++;
+                    if (contador > numero) {
+                        contador = 1;
+                    }
                 }
             }
             System.out.println();
-            contador++;
+            
         }
     }
 }

@@ -1,39 +1,66 @@
 import java.util.Scanner;
 
 public class Ejercicio08{
-    public static void main (String[] args){
+	public static void main(String[] args) {
+		
+		// Variable de Entrada
+		Scanner entrada = new Scanner(System.in);
 
-        Scanner teclado = new Scanner(System.in);
+		System.out.print(" => Ingrese un numero N: ");
+		int numero = entrada.nextInt();
 
-        //PENDIENTE EJERCICIO 
+		if ( numero% 2 == 0) {
+			
+			int contador = 0;
+			for (int columna=1; columna<=numero; columna++) {
+				for (int fila=1; fila<=numero; fila++) {
+					if (contador%2 == 0) {
+						
+						int contGenerado = 0;
+						while ( contGenerado<1 ){
+							int aleatorio = (int) (Math.random()*1000);
+							int divisores = 0;
+							for (int h=1; h<=aleatorio; h++) {
+								if (aleatorio%h == 0) {
+									divisores = divisores + 1;
+								}
+							}
+							if (divisores==2) {    // Operador condicional ternario donde hace una condicion en una sola linea 
+								System.out.print("["+(((aleatorio<10)? "00":((aleatorio<100)? "0":""))+aleatorio)+"]");
+								contGenerado = contGenerado + 1;
+							}
+						}
 
-        System.out.print("Ingrese un numero N: ");
-        int numero = teclado.nextInt();
+					}else{
+						
+						int contGenerado = 0;
+						while ( contGenerado<1 ){
+							int aleatorio = (int) (Math.random()*1000);
+							int divisores = 0;
+							for (int h=1; h<=aleatorio; h++) {
+								if (aleatorio%h == 0) {
+									divisores = divisores + 1;
+								}
+							}
+							if (divisores>2) {
+								System.out.print("["+(((aleatorio<10)? "00":((aleatorio<100)? "0":""))+aleatorio)+"]");
+								contGenerado = contGenerado + 1;
+							}
+						}
 
-        int primo = 2;
-        int contador = 0;
+					}
+					contador = contador + 1;
+				}
+				System.out.println("");
+			}	
 
-        while(contador < (numero*numero)){
-            int divisores = 0;
-            for(int i = 1; i<=primo ; i++){
-                if(primo % i == 0){
-                    divisores = divisores + 1;
-                }
-            }
-            if(divisores == 2){
-                System.out.print(" "+""+primo+"");
-                primo++;
-                contador++;
-                if(contador % numero == 0){
-                    System.out.println("");
-                }
-            }else{
-                primo++; 
-            }
 
-            }
-        }            
-    }
+		}else{
+			System.out.println(" ---- EL NUMERO NO ES VALIDO ----");
+		}
+
+	}
+}
     
 
     
