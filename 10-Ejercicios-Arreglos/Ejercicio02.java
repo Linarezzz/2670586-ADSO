@@ -26,13 +26,19 @@ public class Ejercicio02{
                 }
             }
             if(divisores == 2){
-                System.out.println("Numero primo en la posicion "+contador+" "+"es: "+primo+"  ");
+                arreglo[contador] = primo;
                 primo++;
                 contador++;
             }else{
                 primo++; 
             }
 
+        }
+
+        // Ciclo para imprimri
+
+        for (int i = 0; i < arreglo.length; i++){
+            System.out.println("["+arreglo[i]+"]");
         }
 
 
