@@ -35,7 +35,7 @@ public class Ejercicio02{
 
         }
 
-        // Ciclo para imprimri
+        // Ciclo para imprimir
 
         for (int i = 0; i < arreglo.length; i++){
             System.out.println("["+arreglo[i]+"]");
