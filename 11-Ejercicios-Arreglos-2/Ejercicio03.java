@@ -20,5 +20,17 @@ public class Ejercicio03{
             System.out.println("El numero generado es: "+arreglo[i]);
         }
 
+        int mayor = arreglo[0];
+
+        // Ciclo para imprimir el arreglo
+
+        for(int i = 0; i < numero; i++){
+            if(arreglo[i] > mayor){
+                mayor = arreglo[i];
+            }
+        }
+
+        System.out.println("El numero mayor de los generados es: "+mayor);
+
     }
 }
