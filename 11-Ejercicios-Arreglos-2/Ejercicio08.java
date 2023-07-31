@@ -41,7 +41,6 @@ public class Ejercicio08{
         int indicePares = 0;
         int indiceImpares = 0;
 
-        // Separar los números pares e impares en los arreglos correspondientes
         for (int i = 0; i < arreglo.length; i++) {
             if (arreglo[i] % 2 == 0) {
                 arregloPares[indicePares] = arreglo[i];
