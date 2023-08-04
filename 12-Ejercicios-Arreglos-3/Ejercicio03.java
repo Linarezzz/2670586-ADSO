@@ -7,9 +7,9 @@ public class Ejercicio03{
         Scanner texto = new Scanner(System.in);
 
         int numero_registros = 100;
-        String nombre;
         int opcion;
-        //String arreglo [] = new String [nombre];
+        String nombre;
+        String arreglo [] = new String [100];
 
         do{
             System.out.println("                                                            Memoria disponible: "+numero_registros+" Registros");
@@ -26,18 +26,25 @@ public class Ejercicio03{
                 System.out.println("Has seleccionado la opcion 1");
                 System.out.print("Ingrese el nombre completo del cliente: ");
                 nombre = texto.nextLine();
-                //for(int i = 0; i < arreglo.length;i++){
-                    //arreglo[i] += nombre;
-                //}
-                numero_registros--;
-            }
+                
 
-            else if(opcion == 5){
+                numero_registros--;
+            }else if(opcion == 2){
+                System.out.println("La lista de clientes es: ");
+            }else if(opcion == 3){
+
+            }else if(opcion == 4){
+
+            }else if(opcion == 5){
                 System.out.println("Has seleccionado la opcion 5, hasta luego");
             }else{
                 System.out.println("Ingresa una opcion valida");
             }
 
+
+            if (numero_registros == 0){
+                System.out.println("Se ha llegado al limite de memoria, por favor elimine algun cliente");
+            }
 
 
 
