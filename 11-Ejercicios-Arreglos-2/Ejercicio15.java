@@ -16,10 +16,27 @@ public class Ejercicio15{
         //Ciclo para llenar el arreglo
         for(int i = 0; i < arreglo.length; i++){
             System.out.print("Ingrese el valor del dato: ");
-            arreglo[0] = teclado.nextInt();
+            arreglo[i] = teclado.nextInt();
         }
 
         //Verificar si el arreglo es un palíndromo
-        
+        int i = 0;
+        int j = numero - 1;
+        boolean esPalindromo = true;
+
+        while (i < j) {
+            if (arreglo[i] != arreglo[j]) {
+                esPalindromo = false;
+            }
+            i++;
+            j--;
+        }
+
+        // Imprimir el resultado
+        if (esPalindromo) {
+            System.out.println("El arreglo es un palíndromo.");
+        } else {
+            System.out.println("El arreglo no es un palíndromo.");
+        }
     }
 }
