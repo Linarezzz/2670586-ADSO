@@ -94,6 +94,8 @@ public class Persona{
     public void aumentarPeso(int calorias){
         peso = peso + (calorias * 0.00005 );
     }
+
+    
     
 
 }

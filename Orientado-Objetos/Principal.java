@@ -18,5 +18,13 @@ public class Principal{
         persona_01.imprimirEstado(); // Funcion general para imprimir el estado de la persona
         persona_02.imprimirEstado();
 
+        System.out.println("----------------------------------");
+        System.out.println("Arreglo de 10 personas: ");
+
+        //Arreglo
+        Persona arreglo [] = new Persona [10];
+
+        
+
     }
 }
