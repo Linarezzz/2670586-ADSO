@@ -13,7 +13,7 @@ public class Persona{
     // Metodos -> Acciones
     //      - Constructor
     public Persona(int dato1, String dato2, String dato3, int dato4, int dato5, double dato6){    // Definir funcion constructora
-        cedula = dato1;
+        cedula = dato1;    // this. hace referencia a la variable global
         nombres = dato2;
         apellidos = dato3;
         edad = dato4;
