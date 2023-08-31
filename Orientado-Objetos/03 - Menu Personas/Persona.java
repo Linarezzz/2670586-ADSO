@@ -85,14 +85,10 @@ public class Persona{
 
     }
 
-    //Funcion (metodo) para la actividad fisica
-    public void actividadFisica(int minutos){
-        peso = peso - ((peso * 0.00005) * minutos);
-    }
-
-    //Funcion (metodo) para engordar
-    public void aumentarPeso(int calorias){
-        peso = peso + (calorias * 0.00005 );
+    //Funcion (metodo) para imprimir persona
+    public String getInfoInLine(){
+        String texto = cedula+" - "+nombres+" "+apellidos+" - "+edad+" anios - "+altura+" cm - "+peso+" kg";
+        return texto;
     }
 
     
