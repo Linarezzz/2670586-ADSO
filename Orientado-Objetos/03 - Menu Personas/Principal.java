@@ -9,14 +9,6 @@ public class Principal{
         Persona listaPersonas [] = new Persona [99];
         int indicePersonas = 0;
 
-        listaPersonas[0] = new Persona( 108800, "Oscar", "Loaiza", 85, 185, 300.5 );
-		listaPersonas[1] = new Persona( 108801, "Daniel", "Garcia", 32, 175, 110.8 );
-		listaPersonas[2] = new Persona( 108802, "Juan", "Perez", 20, 180, 50);
-		listaPersonas[3] = new Persona( 108803, "Daniela", "Soto", 25, 160, 55);
-		listaPersonas[4] = new Persona( 108804, "Andres", "Guzman", 18, 165, 50);
-
-        indicePersonas = 5;
-
 		int opcion = 0;
 		while( opcion!=11 ){
             System.out.println("\n\n");  // Salto de linea
