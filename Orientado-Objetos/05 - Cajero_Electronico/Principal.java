@@ -6,22 +6,19 @@ public class Principal{
         Scanner entrada_texto = new Scanner(System.in);
         Scanner entrada_numero = new Scanner(System.in);
 
-        CajeroElectronico cajero_01= new CajeroElectronico(500,250,5,10,20,2,"Banco popular","adso123","Admin pro");
-
-        cajero_01.imprimirDetalle();
-
         CajeroElectronico cajero_02 = new CajeroElectronico(150000000, "Davivienda","adso45321","1234");
-        cajero_02.imprimirDetalle();
-
         cajero_02.abastecerCajero(1000, 1000, 500, 500);
+        cajero_02.abastecerCajero(20000, 20000, 5000, 5000);
         cajero_02.imprimirDetalle();
 
-        TarjetaDebito miTarjeta = new TarjetaDebito("Juan", "1234 5678 9012 3456", "Banco pobre", 1500, 500, "1234", "ACTIVA");
-        miTarjeta.aumentarSaldo(500); // Aumenta el saldo en 500 unidades
+        TarjetaDebito tarjeta_01 = new TarjetaDebito("Juan Linares", "0001 0001 0001 0001" ,"Banco pobre",0,450000,"2299");
+        
+        cajero_02.consignarDineroTarjeta(tarjeta_01, "2299", 0,0,0,0);
 
-        miTarjeta.imprimirDetalle();
+        cajero_02.imprimirDetalle();
 
-        miTarjeta.disminuirSaldo(200);
-        miTarjeta.imprimirDetalle();
+
+
+        
     }
 }
