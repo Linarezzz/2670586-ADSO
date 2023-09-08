@@ -9,7 +9,7 @@ public class CajeroElectronico{
     int cant_50;
     int cant_100;
     String nombreBanco;
-    String listaTransacciones[];  // Los atributos que son arreglos NO se ponen en el constructor
+    String listaTransacciones [];  // Los atributos que son arreglos NO se ponen en el constructor
     String usuarioAdmin;
     String claveAdmin;
 
