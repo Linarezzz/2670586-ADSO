@@ -17,6 +17,17 @@ public class Principal{
 
         cajero_02.imprimirDetalle();
 
+        cajero_02.retirarDineroTarjeta(tarjeta_01, "2299", 0,0,0,0);
+        cajero_02.imprimirDetalle();
+
+        cajero_02.verHistorialTarjeta(tarjeta_01,"2299");
+
+        cajero_02.ConsultarSaldoTarjeta(tarjeta_01,"2299");
+
+        cajero_02.CambiarClave(tarjeta_01,"2299","1234");
+
+        cajero_02.verHistorialTarjeta(tarjeta_01,"2299");
+
 
 
         

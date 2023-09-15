@@ -160,4 +160,21 @@ public class TarjetaDebito{
     public String getNumero(){
         return numeroTarjeta;
     }
+
+    public String getClave(){
+        return clave;
+    }
+
+    public void setClave(String nuevaClave) {
+        this.clave = nuevaClave;
+    }
+
+
+    public int getDineroDisponible(){
+        return dineroDisponible;
+    }
+
+    public String[] getTransaccionesTarjeta() {
+        return TransaccionesTarjeta;
+    }       
 }

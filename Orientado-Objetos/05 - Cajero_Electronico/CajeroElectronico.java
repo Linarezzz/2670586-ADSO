@@ -183,4 +183,92 @@ public class CajeroElectronico{
         }
         
     }
+
+    public void retirarDineroTarjeta(TarjetaDebito tarjeta, String clave, int cant_10, int cant_20, int cant_50, int cant_100){
+        int monto = (10000 * cant_10) + (20000 * cant_20) + (50000 * cant_50) + (100000 * cant_100);
+        // Validar la clave
+        if(tarjeta.validarClave(clave)){
+            // Validar el estado de la tarjeta "ACTIVA"
+            if(tarjeta.validarEstadoActiva() ){
+
+                // El monto a retirar ingresado sea mayor a 0
+                if(monto > 0 && monto < tarjeta.getDineroDisponible()){
+                    // Validar que con el dinero a retirar no supere el limite del cajero
+                    if(dineroDisponible - monto < capacidadTotal){
+                        // Disminuir saldo de la tarjeta
+                        tarjeta.disminuirSaldo(monto, clave);
+
+                        // Disminuir el saldo del cajero y cantidades de billetes
+                        dineroDisponible -= monto;
+                        this.cant_10 -= cant_10;
+                        this.cant_20 -= cant_20;
+                        this.cant_50 -= cant_50;
+                        this.cant_100 -= cant_100;
+
+                        // Registrar la transacción
+                        System.out.println("  ===> REALIZADO - RETIRAR DINERO <===");
+                        registrarTransaccion(" RETIRO ",tarjeta.getNumero(), monto," OK");
+                        
+                    }else{
+                        System.out.println("  ===> ERROR MONTO SUPERIOR - RETIRAR DINERO <===");
+                        registrarTransaccion(" RETIRO ",tarjeta.getNumero(), monto," ERROR MONTO SUPERIOR");
+                    }
+
+                }else{
+                    System.out.println("  ===> ERROR MONTO INFERIOR - RETIRAR DINERO <===");
+                    registrarTransaccion(" RETIRO ",tarjeta.getNumero(), monto," ERROR MONTO INFERIOR");
+                }
+            }else{
+                System.out.println("  ===> ERROR ESTADO - RETIRAR DINERO <===");
+                registrarTransaccion(" RETIRO ",tarjeta.getNumero(), monto," ERROR ESTADO"); 
+            }
+
+            
+        }else{
+            System.out.println("  ===> ERROR PASSWORD - RETIRAR DINERO <===");
+            registrarTransaccion(" RETIRO ",tarjeta.getNumero(), monto," ERROR PASSWORD");
+        }
+    }
+
+    public void verHistorialTarjeta(TarjetaDebito tarjeta, String pass) {
+        if (tarjeta.getNumero().equals(tarjeta.getNumero()) && pass.equals(tarjeta.getClave())) {
+            registrarTransaccion(" HISTORIAL", tarjeta.getNumero(), 0, "OK");
+
+            System.out.println("------------------------------------");
+            System.out.println("          HISTORIAL TARJETA         ");
+            System.out.println("------------------------------------");
+            String transacciones [] = tarjeta.getTransaccionesTarjeta();
+            for (int i = 0; i < transacciones.length; i++) {
+                if (transacciones[i] != null) {
+                    System.out.println(transacciones[i]); // Se evalúa cada transacción y si está vacía o no
+                }
+            }
+        } else {
+            System.out.println("  ===> ACCESO DENEGADO <===");
+            registrarTransaccion(" HISTORIAL", tarjeta.getNumero(), 0, "ERROR");
+        }
+    }
+
+    public void ConsultarSaldoTarjeta(TarjetaDebito tarjeta, String pass) {
+        if (tarjeta.getNumero().equals(tarjeta.getNumero()) && pass.equals(tarjeta.getClave())) {
+            registrarTransaccion(" SALDO", tarjeta.getNumero(), 0, "OK");
+            System.out.println("------------------------------------");
+            System.out.println("          SALDO TARJETA             ");
+            System.out.println("------------------------------------");
+            System.out.println("El saldo de la tarjeta es de: " + tarjeta.getDineroDisponible());
+        } else {
+            registrarTransaccion(" SALDO", tarjeta.getNumero(), 0, "ERROR PASS");
+        }
+    }
+
+    public void CambiarClave(TarjetaDebito tarjeta, String pass, String nuevaClave) {
+        if (tarjeta.getNumero().equals(tarjeta.getNumero()) && pass.equals(tarjeta.getClave())) {
+            tarjeta.setClave(nuevaClave); // Actualiza la clave con la nuevaClave
+            registrarTransaccion(" CAMBIO CLAVE", tarjeta.getNumero(), 0, "OK");
+            System.out.println("La clave de la tarjeta ha sido cambiada exitosamente.");
+        } else {
+            registrarTransaccion(" CAMBIO CLAVE", tarjeta.getNumero(), 0, "ERROR PASS");
+            System.out.println("No se pudo cambiar la clave debido a un error en la contraseña.");
+        }
+    }
 }
