@@ -52,4 +52,30 @@ public class Curso{
     }
     
     //Metodos
+
+    public String getInfoinLine(){
+        String texto = codigo +" - "+nombre+" - "+area+" - "+horas+" hrs";
+        return texto;
+    }
+
+    public void imprimirDetalleCurso(){
+        System.out.println(codigo +" - "+nombre+" - "+area+" - "+horas+" hrs");
+        System.out.println("El curso cuenta con los siguientes temas (si esta vacio es por que no hay ningun tema) :");
+
+        for (int i = 0; i < lista_temas.length; i++) {
+            if (lista_temas[i] != null) {
+            System.out.println("- " + lista_temas[i]);
+            }
+        }
+    }
+
+    
+        
+    public void editarInformacionCurso(String nombre, String area, int duracion){
+
+    }
+
+    public void agregarTema(String tema){
+
+    }
 }
