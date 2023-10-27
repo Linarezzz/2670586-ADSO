@@ -10,6 +10,7 @@ public class Principal{
         int indiceCursos = 0;
 
         int opcion = 0;
+
         while(opcion !=7){
             System.out.println("+---------------------------------------------+");
             System.out.println("|                MENU DE CURSOS               |");                    
@@ -50,6 +51,8 @@ public class Principal{
                 Curso temporal = new Curso(codigo,nombre,area,horas);
                 listaCursos[indiceCursos] = temporal;
                 indiceCursos += 1;
+
+                System.out.println("Curso creado con exito");
 
 
             }
@@ -127,6 +130,8 @@ public class Principal{
 
                     Curso temporal = new Curso(codigo,nombre,area,horas);
                     listaCursos[indiceEncontrado] = temporal;
+
+                    System.out.println("Curso editado con exito");
                 }else{
                     System.out.println("+-------------------------------------+");
 					System.out.println("+ El codigo "+codigo+" no corresponde  ");
@@ -151,6 +156,14 @@ public class Principal{
                         indiceEncontrado = i;
                         break;
                     }
+                }
+
+                if(indiceEncontrado != -1){
+                    System.out.print("Ingrese el nombre del tema: ");
+                    String tema = entrada_texto.nextLine();
+
+                    listaCursos[indiceEncontrado].agregarTema(tema);
+
                 }
             }
 

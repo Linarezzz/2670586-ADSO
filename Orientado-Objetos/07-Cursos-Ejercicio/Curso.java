@@ -64,18 +64,22 @@ public class Curso{
 
         for (int i = 0; i < lista_temas.length; i++) {
             if (lista_temas[i] != null) {
-            System.out.println("- " + lista_temas[i]);
+                System.out.println("- " + lista_temas[i]);
             }
         }
     }
 
     
-        
     public void editarInformacionCurso(String nombre, String area, int duracion){
 
     }
 
     public void agregarTema(String tema){
-
+        for (int i = 0; i < lista_temas.length; i++) {
+            if (lista_temas[i] == null) {
+                lista_temas[i] = tema;
+                break;
+            }
+        }
     }
 }
