@@ -1,5 +1,6 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.*; // Swing
+import java.awt.*; // Carpetas
+import java.awt.event.*; // Eventos
 
 public class Principal{
     public static void main (String[] args){
@@ -54,9 +55,13 @@ public class Principal{
         JButton boton_enviar = new JButton();
         boton_enviar.setText("ENVIAR");
 
+        JButton boton_cancelar = new JButton();
+        boton_cancelar.setText("CANCELAR");
+
         contenedor.add(etiqueta_titulo);
         contenedor.add(etiqueta_cedula); // Agregar la etiqueta al contenedor
         contenedor.add(campo_cedula);
+        
 
         contenedor.add(etiqueta_nombre);
         contenedor.add(campo_nombre);
@@ -65,14 +70,35 @@ public class Principal{
         contenedor.add(campo_apellido);
 
         contenedor.add(boton_enviar);
+        contenedor.add(boton_cancelar);
 
         ventana_01.add(contenedor); // Agregar el contenedor a la entana
         ventana_01.revalidate(); // Fuerza la renderizacion
+        ventana_01.pack(); // Organiza los elementos segun su tamaño
+
+        //Eventos
+        ActionListener evento_ingresar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("\n\nSe ha dado click en el boton ingresar");
+                String texto_nombre = campo_nombre.getText();
+                System.out.println("--> Nombre: "+texto_nombre);
+            }
+        };  // Para el boton ingresar
+
+        ActionListener evento_cancelar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Se ha dado click en cancelar");
+            }
+        };  // Para cancelar 
+
+        boton_enviar.addActionListener(evento_ingresar);
+        boton_cancelar.addActionListener(evento_cancelar);
+
 
         // ventana_01.repaint();
         // ventana_01.revalidate();
         // ventana_01.pack(); // Forzar renderizado, ajusta la ventana al tamaño de los elementos
-
-        
     }
 }
