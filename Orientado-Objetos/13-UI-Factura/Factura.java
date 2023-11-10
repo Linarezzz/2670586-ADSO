@@ -228,8 +228,10 @@ public class Factura extends JFrame {
         restricciones.gridheight = 1;
         restricciones.weightx = 10;
         restricciones.weighty = 10;
-        restricciones.fill = GridBagConstraints.BOTH;  
+        restricciones.fill = GridBagConstraints.BOTH;
         contenedor.add(scroll,restricciones);
+
+        
 
 
 
