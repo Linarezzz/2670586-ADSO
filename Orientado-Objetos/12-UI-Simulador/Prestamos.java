@@ -173,7 +173,6 @@ public class Prestamos extends JFrame{ // Extender JFrame
         ActionListener evento_calcular = new ActionListener(){   // Evento para calcular
             public void actionPerformed(ActionEvent event){
                 //Codigo para cuando se de click
-                System.out.println("Click en calcular");
 
                 double capital = Double.parseDouble(campo_capital.getText());  // Extraer datos de la interfaz, double para convertir a numeros
                 double intereses = Double.parseDouble(campo_intereses.getText());
@@ -186,6 +185,7 @@ public class Prestamos extends JFrame{ // Extender JFrame
                     texto += " Cuota #"+i+": "+valor_cuota+"<br>";
                 }
                 texto += "</html>";
+
                 etq_plan_pagos.setText(texto);
             }
         };
@@ -194,9 +194,12 @@ public class Prestamos extends JFrame{ // Extender JFrame
         ActionListener evento_limpiar = new ActionListener(){   // Evento para calcular
             public void actionPerformed(ActionEvent event){
                 //Codigo para cuando se de click
-                System.out.println("Click en limpiar");
-
-                // PENDIENTE HACER BOTON LIMPIAR
+                String texto = "";
+                campo_capital.setText(texto);
+                campo_intereses.setText(texto);
+                campo_cuotas.setText(texto);
+                etq_plan_pagos.setText(texto);
+                
             }
         };
         btn_limpiar.addActionListener(evento_limpiar);
