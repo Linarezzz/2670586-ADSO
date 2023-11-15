@@ -478,14 +478,15 @@ public class Facturador extends JFrame{
             }
     
             public void keyReleased(KeyEvent e){
-                // Crear funcion de buscarProducto, y arriba con texto vacio
+                input_nombre_producto.setText("");
+				buscarProducto();
             }
     
             public void keyTyped(KeyEvent e){
             }
         };
     
-        .addKeyListener( evento_key_producto );
+        input_id_producto.addKeyListener( evento_key_producto );
 
     }
 
@@ -525,6 +526,17 @@ public class Facturador extends JFrame{
             }
         }
     }
+
+	public void buscarProducto(){
+		String id = input_id_producto.getText();
+		for (int i = 0; i < listaProductos.length; i++) {
+			if (listaProductos[i] != null && listaProductos[i].getId().equals(id)){
+				input_nombre_producto.setText(listaProductos[i].getNombre());
+				input_cant_producto.requestFocus();
+			}
+			
+		}
+	}
 
 }
 
