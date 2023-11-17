@@ -1,6 +1,7 @@
 public class Principal{
     public static void main (String[] args){
 
-        Promedio ventana = new Promedio();
+        Materia listaMaterias [] = new Materia [50];
+        Promedio ventana = new Promedio(listaMaterias);
     }
 }
