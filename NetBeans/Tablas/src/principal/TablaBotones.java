@@ -21,7 +21,7 @@ public class TablaBotones extends javax.swing.JFrame {
     Persona listaPersonas[];
     
     public TablaBotones() {
-        listaPersonas = new Persona[5];
+        listaPersonas = new Persona[100];
         listaPersonas[0] = new Persona("108800", "Susana", "Eguis", "3333330", "susi@mail.com");
         listaPersonas[1] = new Persona("108801", "Sebastian", "Valencia", "3333331", "dsebas@mail.com");
         listaPersonas[2] = new Persona("108802", "Juan", "Linares", "3333332", "juan@mail.com");

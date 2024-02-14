@@ -1,5 +1,7 @@
 package principal;
 
+import utils.Persona;
+
 public class EliminarPersona extends javax.swing.JFrame {
     
     TablaBotones ventana;
@@ -143,10 +145,33 @@ public class EliminarPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       for(int i=posicion; i<listaPersonas.length;i++){
-           listaPersonas[i] = listaPersonas[i+1];
-       }
-       listaPersonas[listaPersonas.length-1] = null;
+       
+        // Buscar posición llena
+        int posicion = -1;
+        for (int i = 0; i < listaPersonas.length; i++) {
+            if (listaPersonas[i] != null) {
+                posicion = i;
+                break;
+            }
+        }
+
+        // Eliminar la persona
+        if (posicion != -1) {
+            listaPersonas[posicion] = null;
+        
+           
+}
+
+        
+                    
+                
+            
+            
+        
+
+         
+        
+    
        
        ventana.imprimirPersonas();
        dispose();
