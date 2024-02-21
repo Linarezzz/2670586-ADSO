@@ -72,25 +72,45 @@ public class Menu extends javax.swing.JFrame {
         etqTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etqTitulo.setText("MENU");
 
-        btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCrear.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnCrear.setText("CREAR");
         btnCrear.setFocusable(false);
         btnCrear.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
-        btnLeer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnLeer.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnLeer.setText("LEER");
         btnLeer.setFocusable(false);
         btnLeer.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnLeer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeerActionPerformed(evt);
+            }
+        });
 
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnActualizar.setText("EDITAR");
         btnActualizar.setFocusable(false);
         btnActualizar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnEliminar.setText("ELIMINAR");
         btnEliminar.setFocusable(false);
         btnEliminar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contenPrincipalLayout = new javax.swing.GroupLayout(contenPrincipal);
         contenPrincipal.setLayout(contenPrincipalLayout);
@@ -138,6 +158,22 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+       Crear ventana_crear = new Crear();
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeerActionPerformed
+        
+    }//GEN-LAST:event_btnLeerActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        Buscar ventana_actualizar = new Buscar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
