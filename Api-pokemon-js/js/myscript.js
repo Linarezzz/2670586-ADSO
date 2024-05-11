@@ -36,6 +36,7 @@ function cargarDetalle(endpoint){
 
         nombrePokemon.innerText = data.name;
         imgPokemon.src = data.sprites.other.dream_world.front_default;
+        cargador.style.display = "none";
     });
     
 }
