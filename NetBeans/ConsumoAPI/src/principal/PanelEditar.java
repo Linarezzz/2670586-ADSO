@@ -1,6 +1,10 @@
 
 package principal;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.HashMap;
 import java.util.Map;
 import util.ConsumoAPI;
@@ -173,45 +177,82 @@ public class PanelEditar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       String cedula = campoCedula.getText();
-        
-        if(cedula.equals("")){
-            AlertaError ventana = new AlertaError("Introduzca una cedula");
-        }else{
-            Map<String, String> datosEliminar = new HashMap<>();
-            datosEliminar.put("cedula", cedula);
+        String cedula = campoCedula.getText();
 
-            if(cedula.equals(cedula)){
-                btnEditar.setEnabled(true);
+        if (cedula.equals("")) {
+            AlertaError ventana = new AlertaError("Introduzca una cédula");
+        } else {
+            Map<String, String> datosBuscar = new HashMap<>();
+            datosBuscar.put("cedula", cedula);
+
+            String respuesta04 = consumo.consumoPOST("https://codetesthub.com/API/Obtener.php", datosBuscar);
+            System.out.println("Respuesta buscar: " + respuesta04);
+
+            JsonArray data = JsonParser.parseString(respuesta04).getAsJsonArray();
+            boolean encontrado = false;
+        for (int i = 0; i < data.size(); i++) {
+            JsonObject person = data.get(i).getAsJsonObject();
+            if (cedula.equals(person.get("cedula").getAsString())) {
+                campoNombre.setText(person.get("nombres").getAsString());
+                campoApellido.setText(person.get("apellidos").getAsString());
+                campoTelefono.setText(person.get("telefono").getAsString());
+                campoDireccion.setText(person.get("direccion").getAsString());
+                campoEmail.setText(person.get("email").getAsString());
+                
                 campoNombre.setEnabled(true);
                 campoApellido.setEnabled(true);
                 campoTelefono.setEnabled(true);
-                campoEmail.setEnabled(true);
                 campoDireccion.setEnabled(true);
+                campoEmail.setEnabled(true);
+                
                 btnEditar.setEnabled(true);
-                AlertaExito ventana02 = new AlertaExito("La persona ha sido encontrada");
-                
-                
-                
-            }else{
-                AlertaError ventana03 = new AlertaError("La persona no existe");
+                encontrado = true;
+                break;
             }
         }
+        if (!encontrado) {
+            AlertaError ventana = new AlertaError("La persona no existe");
+        }
+    }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // EndPoint Actualizar
-        Map<String, String> datosActualizar = new HashMap<>();
-        datosActualizar.put("cedula", "1099010");
-        datosActualizar.put("nombres", "Longaniza");
-        datosActualizar.put("apellidos", "Ramirez");
-        datosActualizar.put("telefono", "84848");
-        datosActualizar.put("direccion", "Debajo del viaducto");
-        datosActualizar.put("email", "longaniza@gmail.com");
-        
-        String respuesta03 = consumo.consumoPOST("https://codetesthub.com/API/Actualizar.php", datosActualizar);
-        System.out.println("Respuesta actualizar" + respuesta03);
+        String cedula = campoCedula.getText();
+        String nombre = campoNombre.getText();
+        String apellido = campoApellido.getText();
+        String telefono = campoTelefono.getText();
+        String direccion = campoDireccion.getText();
+        String email = campoEmail.getText();
 
+        if (cedula.equals("") || nombre.equals("") || apellido.equals("") || telefono.equals("") || direccion.equals("") || email.equals("")) {
+            AlertaError ventana = new AlertaError("Llene todos los campos");
+        } else {
+            Map<String, String> datosEditar = new HashMap<>();
+            datosEditar.put("cedula", cedula);
+            datosEditar.put("nombres", nombre);
+            datosEditar.put("apellidos", apellido);
+            datosEditar.put("telefono", telefono);
+            datosEditar.put("direccion", direccion);
+            datosEditar.put("email", email);
+
+            String respuesta05 = consumo.consumoPOST("https://codetesthub.com/API/Actualizar.php", datosEditar);
+            System.out.println("Respuesta actualizar: " + respuesta05);
+
+            JsonObject resp = JsonParser.parseString(respuesta05).getAsJsonObject();
+            boolean status = resp.get("status").getAsBoolean();
+
+            if (status) {
+                AlertaExito ventana = new AlertaExito("Persona actualizada con éxito");
+                campoCedula.setText("");
+                campoNombre.setText("");
+                campoApellido.setText("");
+                campoTelefono.setText("");
+                campoDireccion.setText("");
+                campoEmail.setText("");
+            } else {
+                AlertaError ventana = new AlertaError("Error en la solicitud");
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
 
