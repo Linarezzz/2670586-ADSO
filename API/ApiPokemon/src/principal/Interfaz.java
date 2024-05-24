@@ -1,18 +1,17 @@
 package principal;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.util.Vector;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import utils.ButtonEditor;
-import utils.ButtonRenderer;
 import utils.ConsumoAPI;
 
 public class Interfaz extends javax.swing.JFrame {
@@ -34,24 +33,92 @@ public class Interfaz extends javax.swing.JFrame {
         setResizable(false);
         setIconImage( getToolkit().createImage( ClassLoader.getSystemResource("imagenes/pokeball.png") ) );
         
-        modelo = (DefaultTableModel) TablaNombres.getModel();
-        
-        TablaNombres.getColumnModel().getColumn(1).setCellEditor(new ButtonEditor(new JCheckBox()));
-        TablaNombres.getColumnModel().getColumn(1).setCellRenderer(new ButtonRenderer());
-        
-        // Tamaño columna
-        TablaNombres.getColumnModel().getColumn(1).setPreferredWidth(100);
-        
+        contNombres.setLayout(new BoxLayout(contNombres, BoxLayout.Y_AXIS));
         revalidate();
+        
+        modelo = (DefaultTableModel) tablaHabilidades.getModel();
+        
+        tablaHabilidades.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tablaHabilidades.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablaHabilidades.getColumnModel().getColumn(2).setPreferredWidth(200);
+        
+        // Ajuste del Orden y Ancho de Columnas
+        tablaHabilidades.getTableHeader().setReorderingAllowed(false);
+        tablaHabilidades.getTableHeader().setResizingAllowed(false);
+        
+        // Alto de las filas
+        tablaHabilidades.setRowHeight(20);
     }
     
-    public void imprimirPokemon(){
-        
-        // EndPoint pokemons
-        String respuesta01 = consumo.consumoGET("https://pokeapi.co/api/v2/pokemon");
-        System.out.println("Respuesta obtener" + respuesta01);
-        
-            
+    public void imprimirPokemon() {
+        // Endpoint pokemons
+        String respuesta01 = consumo.consumoGET("https://pokeapi.co/api/v2/pokemon?limit=20");
+        System.out.println("Respuesta obtener: " + respuesta01);
+
+        JsonObject pokemonObject = JsonParser.parseString(respuesta01).getAsJsonObject();
+        JsonArray pokemonArray = pokemonObject.getAsJsonArray("results");
+
+        for (int i = 0; i < pokemonArray.size(); i++) {
+            JsonObject pokemon = pokemonArray.get(i).getAsJsonObject();
+            String name = pokemon.get("name").getAsString();
+            String url = pokemon.get("url").getAsString();
+
+            // Boton para cada pokemon
+            JButton pokemonButton = new JButton(name);
+
+            pokemonButton.setBackground(Color.WHITE);
+            pokemonButton.setContentAreaFilled(false);
+            pokemonButton.setFocusPainted(true);
+            pokemonButton.setHorizontalAlignment(SwingConstants.CENTER);
+            pokemonButton.setVerticalAlignment(SwingConstants.CENTER);
+            pokemonButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String nombrePokemon = name;
+                    String pokemonUrl = url;
+                    String respuesta02 = consumo.consumoGET(pokemonUrl);
+                    JsonObject pokemonObject = JsonParser.parseString(respuesta02).getAsJsonObject();
+                    JsonArray pokemonInfo = pokemonObject.getAsJsonArray("abilities");
+                    JsonObject pokemonImagen = pokemonObject.getAsJsonObject("sprites");
+                    JsonObject pokemonImagenOtro = pokemonImagen.getAsJsonObject("other");
+                    JsonObject pokemonImagenDreamWorld = pokemonImagenOtro.getAsJsonObject("dream_world");
+                    String imagen = pokemonImagenDreamWorld.get("front_default").getAsString();
+
+                    
+                    modelo.setRowCount(0);
+                    for (int i = 0; i < pokemonInfo.size(); i++) {
+                        JsonObject temp = pokemonInfo.get(i).getAsJsonObject();
+                        JsonObject ObjetoHabilidad = temp.getAsJsonObject("ability");
+                        String habilidad = ObjetoHabilidad.get("name").getAsString();
+                        String url = ObjetoHabilidad.get("url").getAsString();                        
+
+                        Object datos[] = new Object[]{(i + 1), habilidad, url};
+                        modelo.addRow(datos);
+                    }
+                  
+                    // Cambiar el etqPokemon con el nombre del Pokemon
+                    etqNombrePokemon.setText(nombrePokemon);
+                    etqNombrePokemon.setForeground(Color.BLACK);
+                    etqNombrePokemon.setText(etqNombrePokemon.getText().toUpperCase());
+                    contInfo.revalidate();
+                    contInfo.repaint();
+                    
+                    // Load the image from the URL
+                    ImageIcon imageIcon = new ImageIcon(imagen);
+                    Image image = imageIcon.getImage();
+                    image = image.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                    etqImagen.setIcon(new ImageIcon(image));
+
+
+                }
+            });
+
+            // Poner el boton al contenedor
+            contNombres.add(pokemonButton);
+      
+         }
+
+        revalidate();
     }
    
     @SuppressWarnings("unchecked")
@@ -60,9 +127,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         contPrincipal = new javax.swing.JPanel();
         etqTitulo = new javax.swing.JLabel();
-        contNombres = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaNombres = new javax.swing.JTable();
+        contNombres = new javax.swing.JPanel();
+        contInfo = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaHabilidades = new javax.swing.JTable();
+        etqNombrePokemon = new javax.swing.JLabel();
+        etqImagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,26 +144,50 @@ public class Interfaz extends javax.swing.JFrame {
         etqTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etqTitulo.setText("POKEDEX");
 
-        TablaNombres.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        contNombres.setLayout(new javax.swing.BoxLayout(contNombres, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(contNombres);
 
+        contInfo.setBackground(new java.awt.Color(255, 255, 255));
+        contInfo.setForeground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout contInfoLayout = new javax.swing.GroupLayout(contInfo);
+        contInfo.setLayout(contInfoLayout);
+        contInfoLayout.setHorizontalGroup(
+            contInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 464, Short.MAX_VALUE)
+        );
+        contInfoLayout.setVerticalGroup(
+            contInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 447, Short.MAX_VALUE)
+        );
+
+        tablaHabilidades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                ""
+                "N", "Habilidad", "Url"
             }
-        ));
-        jScrollPane1.setViewportView(TablaNombres);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        javax.swing.GroupLayout contNombresLayout = new javax.swing.GroupLayout(contNombres);
-        contNombres.setLayout(contNombresLayout);
-        contNombresLayout.setHorizontalGroup(
-            contNombresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-        );
-        contNombresLayout.setVerticalGroup(
-            contNombresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaHabilidades);
+
+        etqNombrePokemon.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        etqNombrePokemon.setForeground(new java.awt.Color(255, 255, 255));
+        etqNombrePokemon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etqNombrePokemon.setText("jLabel1");
+
+        etqImagen.setForeground(new java.awt.Color(255, 255, 255));
+        etqImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etqImagen.setText("jLabel1");
 
         javax.swing.GroupLayout contPrincipalLayout = new javax.swing.GroupLayout(contPrincipal);
         contPrincipal.setLayout(contPrincipalLayout);
@@ -104,9 +199,20 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(222, 222, 222)
                         .addComponent(etqTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(contPrincipalLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(contNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(222, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(contPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contPrincipalLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contPrincipalLayout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addGroup(contPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(etqImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(etqNombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contPrincipalLayout.setVerticalGroup(
             contPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,15 +220,23 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(etqTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGroup(contPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                    .addComponent(contInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(contPrincipalLayout.createSequentialGroup()
+                        .addComponent(etqNombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(etqImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(contPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,10 +282,14 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaNombres;
+    private javax.swing.JPanel contInfo;
     private javax.swing.JPanel contNombres;
     private javax.swing.JPanel contPrincipal;
+    private javax.swing.JLabel etqImagen;
+    private javax.swing.JLabel etqNombrePokemon;
     private javax.swing.JLabel etqTitulo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaHabilidades;
     // End of variables declaration//GEN-END:variables
 }
