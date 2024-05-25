@@ -7,15 +7,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import utils.ConsumoAPI;
 
 public class Pokedex extends javax.swing.JFrame {
     
-    int [] listaNumeros = new int []{1,2,3,4,5,6,7};
-
     ConsumoAPI consumo;
     int pagina;
     
@@ -162,61 +158,93 @@ public class Pokedex extends javax.swing.JFrame {
     }
     
     
-    public void cargarPaginador(){
+    public void cargarPaginador() {
         panelPaginador.removeAll();
         panelPaginador.add(Box.createHorizontalGlue());
-        
+
         JButton boton_atras_pagina = new JButton("<");
         JButton boton_atras_completo = new JButton("<<");
-        
+
         panelPaginador.add(boton_atras_completo);
         panelPaginador.add(boton_atras_pagina);
-        
-        // Imprimir boton primer pagina
-        for (int i=0; i < 7; i++) {
-            
-            JButton botones = new JButton(String.valueOf(listaNumeros[i]));     
+
+        // Ciclo para los primeros 7 botones e ir incrementando
+        for (int i = 0; i < Math.min(7, 66 - pagina + 1); i++) {
+            final int paginaActual = i + pagina;
+
+            JButton botones = new JButton(String.valueOf(paginaActual));
             panelPaginador.add(botones);
-            
+
             botones.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    
-                    
+                    pagina = paginaActual;
+                    panelBotones.removeAll();
+                    cargarPokemones();
                     revalidate();
                     repaint();
-                }
+                 }
             });
-           
         }
-        
+
         JButton boton_siguiente_pagina = new JButton(">");
         JButton boton_siguiente_completo = new JButton(">>");
-        
         panelPaginador.add(boton_siguiente_pagina);
         panelPaginador.add(boton_siguiente_completo);
-        
-        
-        
+
+        boton_siguiente_pagina.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina++;
+                if (pagina > 66) {
+                    pagina = 66;
+                }
+                panelBotones.removeAll();
+                cargarPokemones();
+                revalidate();
+                repaint();
+            }
+        });
+
+        boton_siguiente_completo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina = 66;
+                panelBotones.removeAll();
+                cargarPokemones();
+                revalidate();
+                repaint();
+            }
+        });
+
+        boton_atras_pagina.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina--;
+                if (pagina < 1) {
+                    pagina = 1;
+                }
+                panelBotones.removeAll();
+                cargarPokemones();
+                revalidate();
+                repaint();
+            }
+        });
+
+        boton_atras_completo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina = 1;
+                panelBotones.removeAll();
+                cargarPokemones();
+                revalidate();
+                repaint();
+            }
+        });
+
         panelPaginador.add(Box.createHorizontalGlue());
         revalidate();
         repaint();
-
-        // Imprimir boton pagina atras
-        
-        
-        // Imprimir botones de paginas
-        
-        
-        // Imprimir boton pagina siguiente
-        
-        
-        // Imprimir boton ultima pagina
-        
-        
-
-        
-        
     }
     
     

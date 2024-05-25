@@ -9,8 +9,9 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import utils.ConsumoAPI;
 
 public class DetallePokemon extends javax.swing.JPanel {
@@ -56,10 +57,19 @@ public class DetallePokemon extends javax.swing.JPanel {
         
         // Alto de las filas
         tablaHabilidades.setRowHeight(20);
+        
+        // Centrar contenido de las tablas incluido las columnas
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < tablaHabilidades.getColumnCount(); i++) {
+            tablaHabilidades.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
         JsonArray habilidades = this.pokemon.getAsJsonArray("abilities");
         for (int i=0; i<habilidades.size(); i++) {
             JsonObject temp = habilidades.get(i).getAsJsonObject().getAsJsonObject("ability");
-            Object[] fila = new Object[]{ i, temp.get("name").getAsString(), temp.get("url").getAsString()};
+            Object[] fila = new Object[]{ i+1, temp.get("name").getAsString(), temp.get("url").getAsString()};
             modelo.addRow(fila);
         }
         
@@ -140,9 +150,16 @@ public class DetallePokemon extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tablaHabilidades);
