@@ -3,9 +3,11 @@ package Principal;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import utils.ConsumoAPI;
 
 
@@ -118,6 +120,9 @@ public class Digidex extends javax.swing.JFrame {
         etqLogo.setIcon(new ImageIcon(icono));
         setVisible(true);
         
+        panelDigimones.setLayout(new GridLayout(2,3));
+        
+        
     }
     
     public void cargarDigimones(){
@@ -128,7 +133,16 @@ public class Digidex extends javax.swing.JFrame {
         JsonObject dataJson = JsonParser.parseString(data).getAsJsonObject();
         JsonArray content = dataJson.getAsJsonArray("content");
         
-        
+        for (int i = 0; i < content.size(); i++) {
+            //Añadir los contenedores InfoDigimon
+            
+            JsonObject temp = content.get(i).getAsJsonObject();
+            InfoDigimon contenedor = new InfoDigimon(temp);
+            panelDigimones.add(contenedor);
+            
+            revalidate();
+            repaint();
+        }
                     
         revalidate();
         repaint();
