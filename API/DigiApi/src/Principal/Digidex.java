@@ -49,7 +49,7 @@ public class Digidex extends javax.swing.JFrame {
         panelDigimones.setLayout(panelDigimonesLayout);
         panelDigimonesLayout.setHorizontalGroup(
             panelDigimonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 877, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelDigimonesLayout.setVerticalGroup(
             panelDigimonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,7 +62,7 @@ public class Digidex extends javax.swing.JFrame {
         panelPaginador.setLayout(panelPaginadorLayout);
         panelPaginadorLayout.setHorizontalGroup(
             panelPaginadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 877, Short.MAX_VALUE)
         );
         panelPaginadorLayout.setVerticalGroup(
             panelPaginadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,25 +73,22 @@ public class Digidex extends javax.swing.JFrame {
         contentPrincipal.setLayout(contentPrincipalLayout);
         contentPrincipalLayout.setHorizontalGroup(
             contentPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPrincipalLayout.createSequentialGroup()
-                .addContainerGap(379, Short.MAX_VALUE)
-                .addComponent(etqLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(292, 292, 292))
             .addGroup(contentPrincipalLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(contentPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(contentPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelDigimones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelPaginador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(panelPaginador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
+            .addComponent(etqLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPrincipalLayout.setVerticalGroup(
             contentPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPrincipalLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(etqLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(etqLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(panelDigimones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(panelDigimones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(panelPaginador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -118,6 +115,7 @@ public class Digidex extends javax.swing.JFrame {
         Image icono = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/logoDigimon.png"));
         icono= icono.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
         etqLogo.setIcon(new ImageIcon(icono));
+        setResizable(false);
         setVisible(true);
         
         panelDigimones.setLayout(new GridLayout(2,3));
