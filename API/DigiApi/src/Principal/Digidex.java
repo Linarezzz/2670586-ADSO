@@ -6,6 +6,10 @@ import com.google.gson.JsonParser;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import utils.ConsumoAPI;
@@ -141,12 +145,92 @@ public class Digidex extends javax.swing.JFrame {
             revalidate();
             repaint();
         }
-                    
+        cargarPaginador();   
         revalidate();
         repaint();
         
     }
     
+    public void cargarPaginador() {
+        panelPaginador.removeAll();
+        panelPaginador.setLayout(new BoxLayout(panelPaginador, BoxLayout.LINE_AXIS));
+        panelPaginador.add(Box.createHorizontalGlue());
+
+        JButton boton_atras_pagina = new JButton("<");
+        JButton boton_atras_completo = new JButton("<<");
+
+        boton_atras_pagina.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina = Math.max(0, pagina - 1);
+                panelDigimones.removeAll();
+                cargarDigimones();
+            }
+        });
+
+        boton_atras_completo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina = 0;
+                panelDigimones.removeAll();
+                cargarDigimones();
+            }
+        });
+
+        panelPaginador.add(boton_atras_completo);
+        panelPaginador.add(boton_atras_pagina);
+
+        
+        for (int i = 0; i < 7; i++) {
+            final int paginaActual = pagina + i; 
+
+            if (paginaActual <= 291) {
+                JButton botones = new JButton(String.valueOf(paginaActual + 1)); 
+                panelPaginador.add(botones);
+
+                botones.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        pagina = paginaActual;
+                        panelDigimones.removeAll();
+                        cargarDigimones();
+                    }
+                });
+            }
+        }
+
+        JButton boton_siguiente_pagina = new JButton(">");
+        JButton boton_siguiente_completo = new JButton(">>");
+
+        boton_siguiente_pagina.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina = Math.min(291, pagina + 1); 
+                panelDigimones.removeAll();
+                cargarDigimones();
+            }
+        });
+
+        boton_siguiente_completo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pagina = 291;
+                panelDigimones.removeAll();
+                cargarDigimones();
+            }
+        });
+
+        panelPaginador.add(boton_siguiente_pagina);
+        panelPaginador.add(boton_siguiente_completo);
+
+        panelPaginador.add(Box.createHorizontalGlue());
+        panelPaginador.revalidate();
+        panelPaginador.repaint();
+    }
+
+
+
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
